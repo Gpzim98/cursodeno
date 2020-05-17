@@ -1,6 +1,7 @@
 import { FlagsParser } from "./flags_parser.ts";
 import { Server, serve } from "https://deno.land/std/http/server.ts";
 import { RouterResolver } from './routes.ts';
+import { DBSetup } from './models/db_setup.ts'; 
 
 const { args } = Deno;
 class WebServer
@@ -19,6 +20,11 @@ class WebServer
     async run()
     {
         import(this.flagsParser.getHandler()).then(hander => {
+            var dbsetup = new DBSetup(
+                hander.config.db_setup.dbname,
+                hander.config.db_setup.dbengine
+            );
+            dbsetup.syncdb();
             this.executeAsyncLoop(hander);
         });
     }
