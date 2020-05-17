@@ -1,10 +1,17 @@
 import { ServerRequest } from "https://deno.land/std/http/server.ts";
-import { urls } from './myapp/urls.ts';
 import { PermissionsMiddleware } from './middlewares/PermissionsMiddleware.ts';
 
 export class RouterResolver
 {
     permissionMiddleware : PermissionsMiddleware = new PermissionsMiddleware();
+    urls : any;
+
+    constructor(handler : any)
+    {
+        console.log(handler);
+        this.urls = handler.global_urls;
+    }
+
     urlMatches(pattern: string, url: string) : boolean
     {
         var regexp = new RegExp(pattern);
@@ -15,7 +22,7 @@ export class RouterResolver
     {       
         var urlNotFound = false;
 
-        for (let set of urls)
+        for (let set of this.urls)
             if(this.urlMatches(set.reg, request.url))
                 if (this.permissionMiddleware.userIsAllowed(request))
                 {
