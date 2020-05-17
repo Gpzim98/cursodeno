@@ -1,3 +1,6 @@
+MVC - Models, views e controllers 
+    middlewares, permissao, authenticacao, rotas
+CLI - parametros
 Rotas
 middlewares
     authenticacao
