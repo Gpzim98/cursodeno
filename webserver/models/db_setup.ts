@@ -1,4 +1,4 @@
-import { Database } from 'https://deno.land/x/denodb/mod.ts';
+import { Database, Model } from 'https://deno.land/x/denodb/mod.ts';
 import { User } from './base_models.ts';
 
 export class DBSetup
@@ -31,5 +31,14 @@ export class DBSetup
         await User.create({ name: 'Gregory' });
         await this.db.close();
         console.log('Db created');
+    }
+
+    async syncAllModels(models: typeof Model[])
+    {
+        console.log('Starting to sync db...');
+        this.db.link(models);
+        await this.db.sync({drop: true});
+        await this.db.close();
+        console.log('DB successfully synced!');
     }
 }

@@ -4,13 +4,20 @@ export class FlagsParser
 {
     port : number;
     handler : any;
+    syncdb? : string;
 
     constructor(args : string[])
     {
         var params = parse(args);
         this.port = params.port;      
-        this.handler = params.handler;  
+        this.handler = params.handler;
+        this.syncdb = params.sync;
         console.log('Handler: ' + this.handler);
+    }
+
+    getSyncDb()
+    {
+        return this.syncdb?.toUpperCase() === 'YES';
     }
 
     getPort() : number

@@ -17,6 +17,15 @@ class WebServer
         console.log("Running on ports: " + this.flagsParser.getPort()); 
     }
 
+    syncdb(hander : any)
+    {
+        var dbsetup = new DBSetup(
+            hander.config.db_setup.dbname,
+            hander.config.db_setup.dbengine
+        );
+        dbsetup.syncdb();
+    }
+
     async run()
     {
         import(this.flagsParser.getHandler()).then(hander => {
@@ -24,6 +33,12 @@ class WebServer
                 hander.config.db_setup.dbname,
                 hander.config.db_setup.dbengine
             );
+            
+            if(this.flagsParser.getSyncDb())
+            {
+                dbsetup.syncAllModels(hander.config.models_to_sync);
+                return;
+            };
             dbsetup.syncdb();
             this.executeAsyncLoop(hander);
         });
