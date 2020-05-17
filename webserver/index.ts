@@ -1,7 +1,6 @@
 import { FlagsParser } from "./flags_parser.ts";
 import { Server, serve } from "https://deno.land/std/http/server.ts";
 import { RouterResolver } from './routes.ts';
-import { appname } from '../myproj/settings.ts';
 
 const { args } = Deno;
 class WebServer
@@ -17,17 +16,16 @@ class WebServer
         console.log("Running on ports: " + this.flagsParser.getPort()); 
     }
 
-    async run() : Promise<void>
+    async run()
     {
-        var realPath = this.flagsParser.getHandler();
-        await import(realPath).then(handler =>{
-            var urlResolver : RouterResolver = new RouterResolver(handler);
-            this.executeLoop(urlResolver);
+        import(this.flagsParser.getHandler()).then(hander => {
+            this.executeAsyncLoop(hander);
         });
     }
 
-    async executeLoop(urlResolver: RouterResolver)
+    async executeAsyncLoop(handler : any) : Promise<void>
     {
+        var urlResolver = new RouterResolver(handler.global_urls);
         for await (const req of this.s)
             urlResolver.getUrlController(req);
     }

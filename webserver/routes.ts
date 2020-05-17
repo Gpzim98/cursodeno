@@ -6,10 +6,9 @@ export class RouterResolver
     permissionMiddleware : PermissionsMiddleware = new PermissionsMiddleware();
     urls : any;
 
-    constructor(handler : any)
+    constructor(urls: any)
     {
-        console.log(handler);
-        this.urls = handler.global_urls;
+        this.urls = urls;
     }
 
     urlMatches(pattern: string, url: string) : boolean
