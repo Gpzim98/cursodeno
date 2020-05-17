@@ -1,0 +1,15 @@
+WARNING buzz
+WARNING buzz
+WARNING buzz
+WARNING buzz
+WARNING buzz
+WARNING Linha 2 warning
+WARNING Linha 2 warning
+DEBUG Linha 1 debug
+WARNING Linha 2 warning
+ERROR buzz
+CRITICAL Critical
+ERROR buzz
+CRITICAL Critical
+ERROR buzz
+CRITICAL Critical

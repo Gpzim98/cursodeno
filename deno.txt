@@ -1,0 +1,137 @@
+* Deno is a general-purpose JavaScript/TypeScript programming environment
+    - Entire ecosystem
+    - Runtime based on v8 which is now using GN instead of GYP (meta build system 20x faster)
+    - module/package managing system
+
+    * Node is: JavaScript runtime environment to run Js outside of the web
+
+* Created by Ryan Dahl, best known as the mastermind behind Node.js, 
+* Addresses the design flaws that Ryan talked about in his 
+    “10 Things I Regret About Node.js” lecture. Some are calling it the sequel to Node.js,
+* Written in Rust ( initially was in GO )
+* Builds on top of the Tokio platform 
+    * asynchronous run-time for the Rust programming
+    * libuv ( asyncloop )
+* Executes JavaScript using the V8 engine.
+* Deno follows as much as possible the W3C web starndards 
+
+* TypeScript
+    - Builtin, just change the extension .ts and you are ready to go
+        - you can use your own tsconfig.json - deno run -c tsconfig.json
+            - if it conflicts with Denos config you will be alerted 
+            - Deno uses strict mode by defaul, alerting sloppy code practices 
+    - Still compiled to JS but it is transparent 
+    - Not modified TS would not be recompiled 
+
+* Build 
+    - Uses Parcel.js web application bundler to pack all your programmin
+        - Gets the final .js file and load into the V8
+    - ES ( EcmaScript) Modules = standardized module system instead of CommonJS node_modules
+
+* CLI
+    - deno upgrade
+    - deno [subcommand] -h for a summary
+    - deno [subcommand] --help for full details
+    - deno run
+    - deno run -h ( Full list of permissions)
+    - deno --allow-read=/etc ( Allow Deno to read only files on folder etc)
+    - --allow-all or -A to allow all permissions | NOT RECOMMENDED 
+    - deno run --allow-run --allow-write mod.ts
+    - deno info - to get the locations of caching and compiler 
+    - deno bundle index.ts index.js
+
+* Tools
+    - Drake ( Deno task runners )
+    - Install a deno program - Once installed, you can access the program from anywhere in the $PATH
+    - Deno standard modules ( Fix the problem of JS world lack of standard libraries )
+        - https://deno.land/std/
+        - no external dependencies and reviewd by the Deno team
+        - To cover:
+            - http, ws, log, io, encoding (csv, ), fs file system 
+            - Bonus demo UUID and explain microservice integration ?
+            - Test
+    - deno fmt file.ts 
+    - Dependency injection 
+
+* To cover
+    * Using a third part library
+        - https://deno.land/x/
+    * sqlite
+    * send mail
+    * Projects 
+        * Web site
+            * https://deno.land/x/rute/
+        * API
+            * https://deno.land/x/drash/
+            * Connect to DB
+            * Read, write 
+        * Web chat - https://deno.land/std/examples/chat/
+        * Desktop app ?
+        * Task service worked 
+        * Web socket ? https://deno.land/std/ws/
+    * Documentation deno doc 
+    * Creating your own deno module 
+        - serve it with deno file server
+        - import into application from file server
+
+* Security
+    - Secure by default ( By comparison, Node.js has full access to your file system and network.)
+    - command-line options to explicitly allow access to different parts of the system
+        - environment access
+        - network access
+        - file system read/write access
+        - running a subprocess
+* Module System 
+    - No attempt to be compatible with Node modules 
+    - Relatives and absolute imports via URL or file path ( extension is mandatory )
+        - Once you donwnload a file Deno will keep that in cache indefinetely 
+            - But you can run it wih --reload to force it to download again
+    - deps.ts list the dependencies
+    - lock file ensure that the newly downloaded module is identical to the one you originally downloaded
+
+* Package management
+    - It is descentralized now. Anyone can host a ECMAScript package just like anyone can host any type of file on the web.
+    - If you want to download dependencies alongside project code instead of using a global cache, use the $DENO_DIR env variable. ( VENV )
+
+* Best practices
+    - Have a while list for read, write and net
+        - deno --allow-read=/etc
+    - Documentation
+        - deno doc ( JSDoc )
+
+10 Regrets Node
+    The goal of Node was event driven HTTP servers.
+
+    - 1 Regret: Not sticking with Promises.
+    - 2 Regret: Security
+        - Missed the opportunity to have a server side runtime with some securiteis 
+    - 3 Regret: The Build System (GYP) ( Biggest )
+        - Javascript and Webassembly engine ( runs js code) - it is written in c++
+        - Now google uses GN
+    - 4 Regret: package.json
+        - Create the concept of modules from a directory
+        - It is not an real component abstraction
+        - It was added later on as the users needed it
+    - 5 Regret: node_modules
+        - Gets very Big
+        - It massively complicates the module resolution algorithm.
+    - 6 Regret: require("module") without the extension ".js"
+        - Needlessly less explicit.
+        - Not how browser javascript works. You cannot omit the ".js" in a script tag src attribute.
+        - The module loader has to query the file system at multiple locations trying to guess what the user intended.
+    7 Regret: index.js
+        - I thought it was cute, because there was index.html
+        - It needlessly complicated the module loading system.
+        - It became especially unnecessary after require supported package.json
+
+Questions
+    - is the native server suitable for production?
+
+* Visual Studio code extension  
+    - https://marketplace.visualstudio.com/items?itemName=axetroy.vscode-deno
+        * it solves the problem that TS does not require file extension on import 
+        * format the file
+* Original blog post
+    https://blog.logrocket.com/deno-1-0-what-you-need-to-know/
+* Ideas 
+    https://flaviocopes.com/deno/ ( api, file manipulation )

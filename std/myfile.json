@@ -1,0 +1,8 @@
+{
+  "foo": 123,
+  "foo2": "Abc",
+  "Customer": {
+    "Name": "Joao",
+    "Age": 55
+  }
+}
