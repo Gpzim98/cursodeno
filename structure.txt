@@ -1,0 +1,8 @@
+Rotas
+middlewares
+    authenticacao
+    authorizacao
+controllers
+models
+    acesso a banco de dados
+templates / serialization
