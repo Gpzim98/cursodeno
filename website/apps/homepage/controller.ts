@@ -1,10 +1,19 @@
 import { ServerRequest } from "https://deno.land/std/http/server.ts";
-import { config } from '../../settings.ts';
+import { ControllerBase } from "../../../webserver/ControllerBase.ts";
 
-export class HomeController
+
+export class HomeController extends ControllerBase
 {
-    public returnResponse(request : ServerRequest)
+    public async returnResponse(request : ServerRequest)
     {
-        request.respond({ body: 'Welcome to home page of: ' + config.appname });
+        request.respond({ body: await this.getFile("index.html", "homepage") });
+    }
+}
+
+export class AboutController extends ControllerBase
+{
+    public async returnResponse(request : ServerRequest)
+    {
+        request.respond({ body: await this.getFile("about.html", "homepage") });
     }
 }

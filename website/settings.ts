@@ -3,7 +3,7 @@ import { Home, Enquete } from './apps/homepage/models.ts';
 
 export var config = {
     global_urls: urls,
-    appname: 'www.meusite.com.br',
+    projectname: 'website',
     db_setup: {
         dbname: './website.sqlite3',
         dbengine: 'sqlite3'

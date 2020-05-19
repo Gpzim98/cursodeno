@@ -5,6 +5,7 @@ export class FlagsParser
     port : number;
     handler : any;
     syncdb? : string;
+    path : string;
 
     constructor(args : string[])
     {
@@ -12,7 +13,13 @@ export class FlagsParser
         this.port = params.port;      
         this.handler = params.handler;
         this.syncdb = params.sync;
+        this.path = this.handler;
         console.log('Handler: ' + this.handler);
+    }
+
+    getPath()
+    {
+        return this.path;
     }
 
     getSyncDb()
@@ -27,6 +34,6 @@ export class FlagsParser
 
     getHandler() : string
     {
-        return this.handler;
+        return this.handler + "/settings.ts";
     }
 }
