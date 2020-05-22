@@ -1,13 +1,12 @@
-import { readFileStr } from 'https://deno.land/std@v0.50.0/fs/read_file_str.ts';
 import { DenoServer } from './DenoServer.ts';
+import denjucks from "https://deno.land/x/denjucks/mod.js";
 
 export class ControllerBase extends DenoServer
 {
-    async getFile(templateName: string, appname : string)
+    async getFile(templateName: string, appname : string, params : any = null)
     {
-        var fullpath = this.globalSettings.path + "/apps/" + appname + "/templates/" + templateName;
-        console.log(fullpath);
-        
-        return await readFileStr(fullpath);
+        denjucks.configure(this.globalSettings.path + "/apps/" + appname + "/templates/");
+
+        return denjucks.render(templateName, params);
     }
 }

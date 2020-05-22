@@ -6,7 +6,9 @@ export class HomeController extends ControllerBase
 {
     public async returnResponse(request : ServerRequest)
     {
-        request.respond({ body: await this.getFile("index.html", "homepage") });
+        var params = { variable: 888 };
+        request.respond(
+            { body: await this.getFile("index.html", "homepage", params) });
     }
 }
 
@@ -14,6 +16,9 @@ export class AboutController extends ControllerBase
 {
     public async returnResponse(request : ServerRequest)
     {
-        request.respond({ body: await this.getFile("about.html", "homepage") });
+        var params = { page_title: "Welcome to about page" };
+
+        request.respond(
+            { body: await this.getFile("about.html", "homepage", params) });
     }
 }
