@@ -13,7 +13,9 @@ globalSettings.path = flagsParser.getPath();
 var fullPath = globalSettings.path + '/settings.ts';
 import(fullPath).then((handler) => {
     globalSettings.handler = handler;
-    DBSetup.setupDb();
+
+    if(flagsParser.getSyncDb())
+        DBSetup.setupDb();
 });
 
 const app = new Application();

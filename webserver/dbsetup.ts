@@ -9,7 +9,8 @@ export class DBSetup
         var dbPath = globalSettings.path + 
             globalSettings.handler.config.db_setup.dbname;
     
-        const db = new Database('sqlite3', {
+        const db = new Database(
+            globalSettings.handler.config.db_setup.dbengine, {
             filepath: dbPath,
         });
 

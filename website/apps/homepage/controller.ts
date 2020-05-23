@@ -5,10 +5,26 @@ import { Home } from '../homepage/models.ts';
 
 export class UsersController extends ControllerBase
 {
-    public get(context : RouterContext)
+    public async get(context : RouterContext)
     {                       
+        context.response.body = await Home.getAll(Home);
+    }
+
+    public async getById(context : RouterContext)
+    {                     
+        try {
+            let id : string | undefined = context.params.id;
         
-        context.response.body = this.getFile("index.html", "homepage");
+            if(id)
+            {
+                var resp = await Home.getModelById(Home, id);
+                context.response.body = resp;
+            }
+            else
+                context.response.body = "Id needs to be provided";
+        } catch (error) {
+            console.log(error); 
+        }
     }
 
     public async post(context : RouterContext)
@@ -23,14 +39,26 @@ export class UsersController extends ControllerBase
         context.response.body = "put";
     }
 
-    public delete(context : RouterContext)
-    {                       
-        context.response.body = "delete";
+    public async delete(context : RouterContext)
+    {                     
+        try {
+            let id : string | undefined = context.params.id;
+        
+            if(id)
+            {
+                await Home.deleteModel(Home, id);
+                context.response.body = "Object deleted";
+            }
+            else
+                context.response.body = "Id needs to be provided";
+        } catch (error) {
+            console.log(error); 
+        }
     }
 
-    public all(context : RouterContext)
+    public async all(context : RouterContext)
     {                       
-        context.response.body = "all";
+        context.response.body = await Home.all();
     }
 }
 
@@ -46,7 +74,6 @@ export class AboutController extends ControllerBase
 {
     public async returnResponse(context : RouterContext)
     {
-        context.response.body = "From AboutController";
-
+        context.response.body = this.getFile("about.html", "homepage");
     }
 }

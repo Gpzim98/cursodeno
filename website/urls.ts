@@ -6,6 +6,8 @@ export var router = new Router();
 router
     .get('/users', (context) => 
         new UsersController().get(context))
+    .get('/users/:id', (context) =>        
+        new UsersController().getById(context))
     .get('/about', (context) =>
         new AboutController().returnResponse(context))
     .post('/users', async (context) =>
