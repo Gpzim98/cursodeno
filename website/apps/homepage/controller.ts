@@ -3,7 +3,7 @@ import { RouterContext } from "https://deno.land/x/oak/mod.ts";
 import { Home } from '../homepage/models.ts';
 import { Database } from "https://deno.land/x/denodb/mod.ts";
 
-export class HomeController extends ControllerBase
+export class UsersController extends ControllerBase
 {
     public get(context : RouterContext)
     {                       
@@ -12,26 +12,26 @@ export class HomeController extends ControllerBase
 
     public async post(context : RouterContext)
     {                       
-        const db = new Database('sqlite3', {
-            filepath: 'newdb.sqlite3',
-        });
+        // const db = new Database('sqlite3', {
+        //     filepath: 'newdb.sqlite3',
+        // });
         
-        db.link([Home]);
+        // db.link([Home]);
         
-        await Home.create({name: '1'});
-        db.close();
+        // await Home.create({name: '1'});
+        // db.close();
 
         context.response.body = "Post";
     }
 
     public put(context : RouterContext)
-    {                       
+    {                           
         context.response.body = "put";
     }
 
     public delete(context : RouterContext)
     {                       
-        context.response.body = "dekete";
+        context.response.body = "delete";
     }
 
     public all(context : RouterContext)

@@ -1,19 +1,19 @@
-import { HomeController, AboutController } from './apps/homepage/controller.ts';
+import { UsersController, AboutController } from './apps/homepage/controller.ts';
 import { Router } from "https://deno.land/x/oak/mod.ts";
 
 export var router = new Router();
 
 router
     .get('/users', (context) => 
-        new HomeController().get(context))
+        new UsersController().get(context))
     .get('/about', (context) =>
         new AboutController().returnResponse(context))
     .post('/users', async (context) =>
-         new HomeController().post(context))
+         new UsersController().post(context))
     .put('/users/:id', (context) =>        
-        new HomeController().put(context))
+        new UsersController().put(context))
     .delete('/users/:id', (context) => 
-        new HomeController().delete(context))
+        new UsersController().delete(context))
     .all('/users/:id', (context) => 
-        new HomeController().all(context)
+        new UsersController().all(context)
     );
