@@ -6,7 +6,6 @@ export class ControllerBase extends DenoServer
     async getFile(templateName: string, appname : string, params : any = null)
     {
         denjucks.configure(this.globalSettings.path + "/apps/" + appname + "/templates/");
-
         return denjucks.render(templateName, params);
     }
 }

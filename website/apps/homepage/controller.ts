@@ -1,24 +1,58 @@
-import { ServerRequest } from "https://deno.land/std/http/server.ts";
 import { ControllerBase } from "../../../webserver/ControllerBase.ts";
-
+import { RouterContext } from "https://deno.land/x/oak/mod.ts";
+import { Home } from '../homepage/models.ts';
+import { Database } from "https://deno.land/x/denodb/mod.ts";
 
 export class HomeController extends ControllerBase
 {
-    public async returnResponse(request : ServerRequest)
+    public get(context : RouterContext)
+    {                       
+        context.response.body = this.getFile("index.html", "homepage");
+    }
+
+    public async post(context : RouterContext)
+    {                       
+        const db = new Database('sqlite3', {
+            filepath: 'newdb.sqlite3',
+        });
+        
+        db.link([Home]);
+        
+        await Home.create({name: '1'});
+        db.close();
+
+        context.response.body = "Post";
+    }
+
+    public put(context : RouterContext)
+    {                       
+        context.response.body = "put";
+    }
+
+    public delete(context : RouterContext)
+    {                       
+        context.response.body = "dekete";
+    }
+
+    public all(context : RouterContext)
+    {                       
+        context.response.body = "all";
+    }
+}
+
+export class OutroController extends ControllerBase
+{
+    public async returnResponse(context : RouterContext)
     {
-        var params = { variable: 888 };
-        request.respond(
-            { body: await this.getFile("index.html", "homepage", params) });
+        context.response.body = this.getFile("about.html", "homepage");
     }
 }
 
 export class AboutController extends ControllerBase
 {
-    public async returnResponse(request : ServerRequest)
+    public async returnResponse(context : RouterContext)
     {
-        var params = { page_title: "Welcome to about page" };
+        context.response.body = "From AboutController";
 
-        request.respond(
-            { body: await this.getFile("about.html", "homepage", params) });
     }
 }
