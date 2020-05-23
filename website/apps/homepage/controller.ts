@@ -1,7 +1,5 @@
 import { ControllerBase } from "../../../webserver/ControllerBase.ts";
 import { RouterContext } from "https://deno.land/x/oak/mod.ts";
-import { Home } from '../homepage/models.ts';
-import { Database } from "https://deno.land/x/denodb/mod.ts";
 
 export class UsersController extends ControllerBase
 {
