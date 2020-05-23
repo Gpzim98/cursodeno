@@ -1,25 +1,21 @@
 import { ControllerBase } from "../../../webserver/ControllerBase.ts";
 import { RouterContext } from "https://deno.land/x/oak/mod.ts";
+import { Home } from '../homepage/models.ts';
+
 
 export class UsersController extends ControllerBase
 {
     public get(context : RouterContext)
     {                       
+        
         context.response.body = this.getFile("index.html", "homepage");
     }
 
     public async post(context : RouterContext)
-    {                       
-        // const db = new Database('sqlite3', {
-        //     filepath: 'newdb.sqlite3',
-        // });
-        
-        // db.link([Home]);
-        
-        // await Home.create({name: '1'});
-        // db.close();
-
-        context.response.body = "Post";
+    {          
+        var body = await context.request.body();             
+        await Home.save(Home, {name: body.value.name});
+        context.response.body = await Home.all();
     }
 
     public put(context : RouterContext)
