@@ -5,8 +5,10 @@ import { router } from '../website/urls.ts';
 
 const { args } = Deno;
 
-var flagsParser = new FlagsParser(args);
-var globalSettings = GlobalSettings.GetInstance();
+var flagsParser : FlagsParser;
+var globalSettings : GlobalSettings;
+flagsParser = new FlagsParser(args);
+globalSettings = GlobalSettings.GetInstance();
 globalSettings.path = flagsParser.getPath();
 
 const app = new Application();
