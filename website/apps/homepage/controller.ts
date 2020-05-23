@@ -1,13 +1,13 @@
-import { ControllerBase } from "../../../webserver/ControllerBase.ts";
+import { ControllerBase } from "../../../webserver/base_controller.ts";
 import { RouterContext } from "https://deno.land/x/oak/mod.ts";
-import { Home, Enquete } from '../homepage/models.ts';
+import { Home } from '../homepage/models.ts';
 
 
 export class UsersController extends ControllerBase
 {
     public async get(context : RouterContext)
     {                       
-        context.response.body = await Enquete.getAll(Enquete);
+        context.response.body = await Home.getAll(Home);
     }
 
     public async getById(context : RouterContext)
@@ -30,8 +30,8 @@ export class UsersController extends ControllerBase
     public async post(context : RouterContext)
     {          
         var body = await context.request.body();             
-        await Enquete.save(Enquete, {enquete_name: body.value.name});
-        context.response.body = await Enquete.all();
+        await Home.save(Home, {enquete_name: body.value.name});
+        context.response.body = await Home.all();
     }
 
     public put(context : RouterContext)

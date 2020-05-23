@@ -1,5 +1,5 @@
 import { DATA_TYPES } from 'https://deno.land/x/denodb/mod.ts';
-import { BaseModel } from '../../../webserver/base_model.ts';
+import { BaseModel } from '../../../webserver/models/base_model.ts';
 
 export class Home extends BaseModel {
     static table = 'home';

@@ -1,4 +1,4 @@
-import { DenoServer } from './DenoServer.ts';
+import { DenoServer } from './deno_server.ts';
 import denjucks from "https://deno.land/x/denjucks/mod.js";
 
 export class ControllerBase extends DenoServer

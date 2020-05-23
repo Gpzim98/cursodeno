@@ -1,6 +1,6 @@
 import { Database } from "https://deno.land/x/denodb/mod.ts";
 import { Model } from 'https://deno.land/x/denodb/mod.ts';
-import { GlobalSettings } from "./global_settings.ts";
+import { GlobalSettings } from "../global_settings.ts";
 
 export class BaseModel extends Model 
 {
