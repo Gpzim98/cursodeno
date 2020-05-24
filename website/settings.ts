@@ -10,5 +10,8 @@ export var config = {
         Home,
         Enquete,
         Enquete2,
-    ]
+    ],
+    static_folder: 'static',
+    static_url: 'http://localhost:8002/',
+    media_folder: 'media'
 }

@@ -5,6 +5,10 @@ export class ControllerBase extends DenoServer
 {
     getFile(templateName: string, appname : string, params : any = null)
     {
+        if(!params)
+            params = {}
+        
+        params['STATIC_URL'] = this.globalSettings.handler.config.static_url;
         denjucks.configure(this.globalSettings.path + "/apps/" + appname + "/templates/");
         return denjucks.render(templateName, params);
     }
