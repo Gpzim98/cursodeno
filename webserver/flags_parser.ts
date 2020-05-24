@@ -1,4 +1,4 @@
-import { parse } from "https://deno.land/std/flags/mod.ts";
+import { parse } from "https://deno.land/std@0.53.0/flags/mod.ts";
 
 export class FlagsParser
 {

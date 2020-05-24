@@ -1,4 +1,4 @@
-import { Application } from "https://deno.land/x/oak/mod.ts";
+import { Application } from "https://deno.land/x/oak/application.ts";
 import { FlagsParser } from "./flags_parser.ts";
 import { GlobalSettings } from "./global_settings.ts";
 import { router } from '../website/urls.ts';

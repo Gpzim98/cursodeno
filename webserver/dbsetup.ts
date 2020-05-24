@@ -1,4 +1,4 @@
-import { Database } from "https://deno.land/x/denodb/mod.ts";
+import { Database } from "https://deno.land/x/denodb/lib/database.ts";
 import { GlobalSettings } from "./global_settings.ts";
 
 export class DBSetup
