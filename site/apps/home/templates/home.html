@@ -8,7 +8,12 @@
 <body>
     Home page
     
-    <img src="{{ STATIC_URL }}Wallpaper1.png" alt="">
+    <form action="" method="POST">
+        <input type="text" name="name" id="name">
+        <button type="submit">Save</button>
+    </form>
+
+    <img src="{{ STATIC_URL }}Wallpaper1.png" alt="" width="150px" height="150px">
     <br>
     <ul>
         {% for user in users %}

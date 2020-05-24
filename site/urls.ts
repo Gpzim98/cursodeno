@@ -5,4 +5,5 @@ export var router = new Router();
 
 router
     .get('', (context) => new HomeController().get(context))
-    .post('', (context) => new HomeController().post(context));
+    .post('', (context) => new HomeController().post(context))
+    .post('/api', (context) => new HomeController().postJson(context));
