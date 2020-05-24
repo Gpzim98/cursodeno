@@ -9,5 +9,16 @@
     Home page
     
     <img src="{{ STATIC_URL }}Wallpaper1.png" alt="">
+    <br>
+    <ul>
+        {% for user in users %}
+            {% if user.id == 1 %}
+                <b><li>{{ user.id }}: {{ user.name }}</li></b>
+            {% else %}
+                <li>{{ user.id }}: {{ user.name }}</li>
+            {% endif %}
+
+        {% endfor %}
+    </ul>
 </body>
 </html>
