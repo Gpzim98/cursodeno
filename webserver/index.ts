@@ -1,10 +1,10 @@
 import { Application } from "https://deno.land/x/oak/application.ts";
 import { FlagsParser } from "./flags_parser.ts";
 import { GlobalSettings } from "./global_settings.ts";
-import { router } from '../website/urls.ts';
 import { DBSetup } from "./dbsetup.ts";
 
 const { args } = Deno;
+const app = new Application();
 
 var flagsParser = new FlagsParser(args);
 var globalSettings = GlobalSettings.GetInstance();
@@ -18,7 +18,11 @@ import(fullPath).then((handler) => {
         DBSetup.setupDb();
 });
 
-const app = new Application();
-app.use(router.routes());
+var fullPathURL = globalSettings.path + '/urls.ts';
+import(fullPathURL).then((handler) => {
+    app.use(handler.router.routes());
+    console.log('Running on port: ' + flagsParser.getPort());
+    
+    app.listen({ port: flagsParser.getPort() });
+});
 
-await app.listen({ port: 8000 });

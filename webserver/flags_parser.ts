@@ -29,6 +29,8 @@ export class FlagsParser
 
     getPort() : number
     {
+        if(!this.port)
+            this.port = 8000;
         return this.port;
     }
 
