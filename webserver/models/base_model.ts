@@ -1,19 +1,14 @@
 import { Database } from "https://deno.land/x/denodb/lib/database.ts";
 import { Model } from 'https://deno.land/x/denodb/lib/model.ts';
 import { GlobalSettings } from "../global_settings.ts";
+import { DBSetup } from "../dbsetup.ts";
 
 export class BaseModel extends Model 
 {
     static getDB() : Database
     {
         var globalSettings = GlobalSettings.GetInstance();
-        var dbPath = globalSettings.path + 
-            globalSettings.handler.config.db_setup.dbname;
-    
-          const db = new Database('sqlite3', {
-              filepath: dbPath,
-          });
-        return db;  
+        return DBSetup.GetDB(globalSettings);
     }
     static async getAll(model : any)
     {

@@ -12,3 +12,16 @@ export class Home extends BaseModel {
       name: DATA_TYPES.STRING,
     };
 }
+
+
+export class Customer extends BaseModel {
+  static table = 'customers';
+  static timestamps = true;
+  static fields = {
+    id: {
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: DATA_TYPES.STRING,
+  };
+}
