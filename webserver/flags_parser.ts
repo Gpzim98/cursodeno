@@ -6,6 +6,7 @@ export class FlagsParser
     handler : any;
     syncdb? : string;
     path : string;
+    importPath : string;
 
     constructor(args : string[])
     {
@@ -14,6 +15,7 @@ export class FlagsParser
         this.handler = params.handler;
         this.syncdb = params.sync;
         this.path = this.handler;
+        this.importPath = Deno.cwd();
         console.log('Handler: ' + this.handler);
     }
 
@@ -37,5 +39,11 @@ export class FlagsParser
     getHandler() : string
     {
         return this.handler + "/settings.ts";
+    }
+
+    getImportPath()
+    {
+        var re = /\\/gi; 
+        return "file:///" + this.importPath.replace(re, "/");
     }
 }

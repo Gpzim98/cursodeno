@@ -8,21 +8,16 @@ const app = new Application();
 
 var flagsParser = new FlagsParser(args);
 var globalSettings = GlobalSettings.GetInstance();
-globalSettings.path = flagsParser.getPath();
+globalSettings.path = flagsParser.importPath;
 
-var fullPath = globalSettings.path + '/settings.ts';
-import(fullPath).then((handler) => {
+import(flagsParser.getImportPath() + "/settings.ts").then((handler)=>{
     globalSettings.handler = handler;
-
     if(flagsParser.getSyncDb())
         DBSetup.setupDb();
 });
 
-var fullPathURL = globalSettings.path + '/urls.ts';
-import(fullPathURL).then((handler) => {
-    app.use(handler.router.routes());
-    console.log('Running on port: ' + flagsParser.getPort());
-    
+import(flagsParser.getImportPath() + "/urls.ts").then((urls)=>{
+    app.use(urls.router.routes());
     app.listen({ port: flagsParser.getPort() });
 });
 
