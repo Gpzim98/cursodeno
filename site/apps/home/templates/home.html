@@ -3,11 +3,20 @@
 {% block content %}
 	<section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
 		<div class="content">
-			<h1>Story</h1>
-			<p class="major">A (modular, highly tweakable) responsive one-page template designed by <a href="https://html5up.net">HTML5 UP</a> and released for free under the <a href="https://html5up.net/license">Creative Commons</a>.</p>
-			<ul class="actions stacked">
-				<li><a href="#first" class="button big wide smooth-scroll-middle">Get Started</a></li>
-			</ul>
+			<h1>Seja bem vindo ao Deno</h1>
+			<p class="major">Meu website construido com a plataforma do Deno</p>
+
+            <ul>
+                {% for user in users %}
+                    <li> {{ user.id }}. {{ user.name }}</li>
+                {% endfor %}
+            </ul>
+
+            <h2>Adicionar novo</h2>
+            <form method="POST">
+                <input type="text" name="name" id="name"><br>
+                <button type="submit">Save</button> 
+            </form>
 		</div>
 		<div class="image">
 			<img src="{{ STATIC_URL }}images/banner.jpg" alt="" />

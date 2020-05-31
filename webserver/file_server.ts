@@ -8,21 +8,19 @@ const { args } = Deno;
 
 var flagsParser = new FlagsParser(args);
 var globalSettings = GlobalSettings.GetInstance();
-globalSettings.path = flagsParser.getPath();
+globalSettings.path = flagsParser.importPath;
 
-var fullPath = globalSettings.path + '/settings.ts';
-import(fullPath).then((handler) => {
-    globalSettings.handler = handler;
+import(flagsParser.getImportPath() + "/settings.ts").then((handler)=>{
+  globalSettings.handler = handler;
 
-    var server_path = globalSettings.path + '/' + globalSettings.handler.config.static_folder;
-    console.log(server_path);
-    
-    app.use(async (context) => {
-        await send(context, context.request.url.pathname, {
-          root: server_path,
-          index: "index.html",
-        });
-    });
+  var server_path = globalSettings.path + '/' + globalSettings.handler.config.static_folder;
+  
+  app.use(async (context) => {
+      await send(context, context.request.url.pathname, {
+        root: server_path,
+        index: "index.html",
+      });
+  });
 
-    app.listen({ port: flagsParser.getPort() });
+  app.listen({ port: flagsParser.getPort() });
 });
