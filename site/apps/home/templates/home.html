@@ -7,8 +7,8 @@
 			<p class="major">Meu website construido com a plataforma do Deno</p>
 
             <ul>
-                {% for user in users %}
-                    <li> {{ user.id }}. {{ user.name }}</li>
+                {% for customer in customers %}
+                    <li> <a href="/customers/{{ customer.id }}">{{ customer.id }}. {{ customer.name }}</a></li>
                 {% endfor %}
             </ul>
 

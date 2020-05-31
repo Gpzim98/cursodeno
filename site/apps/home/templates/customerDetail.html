@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+		<div class="content">
+            <h1>{{ customer.name }} </h1>
+            <p>{{ customer.id }}. {{ customer.name }}</p>
+            <a href="/">Voltar</a>
+        </div>
+    </section>
+
+    <script>
+        function deleteFlight(id)
+        {
+            $.ajax({
+                url : '/flight/' + id,
+                method : 'delete',
+                data : {
+                    id : id
+                }
+            }).then((res)=>{
+                alert(res);
+                window.location.replace("/");
+            });
+        } 
+    </script>
+{% endblock %}
