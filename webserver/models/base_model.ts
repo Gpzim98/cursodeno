@@ -43,4 +43,13 @@ export class BaseModel extends Model
       await model.deleteById(id);
       db.close();
   }
+
+  static async updateModel(model : any, id : string, data : any)
+  {
+      var db = this.getDB();
+      db.link([model]);
+      var resp = await model.where('id', id).update(data);
+      db.close();
+      return resp;
+  }
 }

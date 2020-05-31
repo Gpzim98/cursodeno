@@ -23,5 +23,6 @@ export class Customer extends BaseModel {
       autoIncrement: true,
     },
     name: DATA_TYPES.STRING,
+    address: DATA_TYPES.STRING,
   };
 }

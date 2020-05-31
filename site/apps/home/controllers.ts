@@ -39,6 +39,27 @@ export class HomeController extends ControllerBase
         }
     }
 
+    async put(context: RouterContext)
+    {        
+        try {
+            var body = await context.request.body();      
+            var form = new URLSearchParams(body.value);  
+
+            var data = {
+                name: form.get('name'),
+                address: form.get('address'),
+            }
+            var id = context.params.id;
+            
+            if(id)
+                await Customer.updateModel(Customer, id, data);
+                context.response.body = "Customer updated successfully";
+        } catch (error) {
+            console.log(error);
+            context.response.body = "There was an error when updating a Customer"
+        }
+    }
+
     public async postJson(context : RouterContext)
     {          
         var body = await context.request.body();             
@@ -51,7 +72,7 @@ export class HomeController extends ControllerBase
         var body = await context.request.body();      
         var form = new URLSearchParams(body.value);  
              
-        await Customer.save(Customer, { name: form.get('name') });
+        await Customer.save(Customer, { name: form.get('name'), address: form.get('address') });
         context.response.body = this.getFile("confirmation.html", "home", { name: form.get('name') });
     }
 }

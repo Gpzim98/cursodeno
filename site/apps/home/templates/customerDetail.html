@@ -5,12 +5,36 @@
 		<div class="content">
             <h1>{{ customer.name }} </h1>
             <p>{{ customer.id }}. {{ customer.name }}</p>
-            <a href="/">Voltar</a>
-            <button onclick="deleteFlight({{ customer.id }})">Delete</button>
+            <a href="/" class="button">Voltar</a>
+            
+            <a onclick="deleteFlight({{ customer.id }})" class="button">Delete</a>
+
+            <br><br>
+            <form>
+                <input type="text" name="name" id="name" value="{{ customer.name }}"><br>
+                <input type="text" name="address" id="address" value="{{ customer.address }}"><br>
+                <button onclick="sendPut({{ customer.id }})">PUT</button>
+            </form>
         </div>
     </section>
-    
+
     <script>
+        function sendPut(id)
+        {
+            var data = {
+                name: document.getElementById('name').value,
+                address: document.getElementById('address').value,
+            }
+
+            $.ajax({
+                url : '/customers/' + id,
+                method : 'put',
+                data : data
+            }).then((res)=>{
+                alert(res);
+                window.location.replace("/");
+            });
+        }
         function deleteFlight(id)
         {
             $.ajax({
