@@ -27,6 +27,18 @@ export class HomeController extends ControllerBase
         }
     }
 
+    async deleteCustomer(context: RouterContext)
+    {        
+        try {
+            var id = context.params.id;
+            if(id)
+                await Customer.deleteModel(Customer, id);
+            context.response.body = "Customer deleted successfully"
+        } catch (error) {
+            context.response.body = "There was an error when trying to delete a Customer"
+        }
+    }
+
     public async postJson(context : RouterContext)
     {          
         var body = await context.request.body();             

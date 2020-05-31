@@ -6,14 +6,15 @@
             <h1>{{ customer.name }} </h1>
             <p>{{ customer.id }}. {{ customer.name }}</p>
             <a href="/">Voltar</a>
+            <button onclick="deleteFlight({{ customer.id }})">Delete</button>
         </div>
     </section>
-
+    
     <script>
         function deleteFlight(id)
         {
             $.ajax({
-                url : '/flight/' + id,
+                url : '/customers/' + id,
                 method : 'delete',
                 data : {
                     id : id
