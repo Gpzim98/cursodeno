@@ -15,7 +15,7 @@ export class Home extends BaseModel {
 
 
 export class Customer extends BaseModel {
-  static table = 'customers';
+  static table = 'customer';
   static timestamps = true;
   static fields = {
     id: {

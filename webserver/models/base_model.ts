@@ -17,7 +17,7 @@ export class BaseModel extends Model
             var db = this.getDB();
             db.link([model]);
             var resp = await model.all();
-            //await db.close();
+            await db.close();
             return resp;
         } catch (error) {
             console.log(error);
