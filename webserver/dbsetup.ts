@@ -49,12 +49,13 @@ export class DBSetup
             try {
                 db.link([model])
                 await db.sync({drop: true});
-                await db.close();
                 console.log('Model ' + model.name + ' synced successfully');
             } catch (error) {                
                 console.log('Model ' + model.name + ' already synced');
             }
+
         }
+        await db.close();
         console.log('DB synced successfully');
     }
 }
