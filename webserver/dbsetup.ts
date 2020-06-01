@@ -3,16 +3,30 @@ import { GlobalSettings } from "./global_settings.ts";
 
 export class DBSetup
 {
+    static getImportPath(path : string)
+    {
+        var re = /\\/gi; 
+        return path.replace(re, "/");
+    }
+
     static GetDB(globalSettings : any)
     {
         let dbsettings = globalSettings.handler.config.db_setup;
         switch (dbsettings.engine)
         {
             case 'sqlite3':
-                var dbPath = globalSettings.path + '/' + dbsettings.database;                
-                return new Database(dbsettings.engine, {
-                    filepath: dbPath,
-                });
+                try {                
+                    var dbPath = globalSettings.path + '\\' + dbsettings.database;
+                                    
+                    var intancedb = new Database(dbsettings.engine, {
+                        filepath: this.getImportPath(dbPath),
+                    });
+                    return intancedb;
+
+                } catch (error) {
+                    console.log(error);
+                    
+                }
             case 'postgres':
                 return new Database('postgres', {
                         host: dbsettings.host,

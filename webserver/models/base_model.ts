@@ -7,16 +7,21 @@ export class BaseModel extends Model
 {
     static getDB() : Database
     {
-        var globalSettings = GlobalSettings.GetInstance();
-        return DBSetup.GetDB(globalSettings);
+        var globalSettings = GlobalSettings.GetInstance();        
+        var db = DBSetup.GetDB(globalSettings);
+        return db;
     }
     static async getAll(model : any)
     {
-        var db = this.getDB();
-        db.link([model]);
-        var resp = await model.all();
-        db.close();
-        return resp;
+        try {
+            var db = this.getDB();
+            db.link([model]);
+            var resp = await model.all();
+            //await db.close();
+            return resp;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     static async getModelById(model : any, id : string)
